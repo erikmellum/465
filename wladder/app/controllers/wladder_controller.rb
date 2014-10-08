@@ -11,14 +11,15 @@ end
 def check
   @wladder= Array.new(7);
   @wladder[0] = params[:step0]
-  @wladder[1] = params[:step1]
-  @wladder[2] = params[:step2]
-  @wladder[3] = params[:step3]
-  @wladder[4] = params[:step4]
-  @wladder[5] = params[:step5]
+  @wladder[1] = params[:step1] if params[:step1] != ""
+  @wladder[2] = params[:step2] if params[:step2] != ""
+  @wladder[3] = params[:step3] if params[:step3] != ""
+  @wladder[4] = params[:step4] if params[:step4] != ""
+  @wladder[5] = params[:step5] if params[:step5] != ""
   @wladder[6] = params[:step6]
-  @result = "You lose!"  
-  @result = "You win!" if legal @wladder.compact
+  @result = "You lose!" 
+  @wladder.compact! 
+  @result = "You win!" if legal @wladder
 
 end
 

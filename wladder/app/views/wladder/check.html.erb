@@ -5,7 +5,7 @@
     <td>Start: <%= @wladder[0] %> </td>
   </tr>
   <% i = 0 %>  
-  <% for i in 1..5 do %>  
+  <% for i in 1..@wladder.length-2 do %>  
       <% if @wladder[i] != "" %>
         <td>Step <%= i %>: </td>
         <td><%= @wladder[i] %></td>
@@ -13,7 +13,7 @@
     </tr>
   <% end %>
   <tr>
-    <td>End: <%= @wladder[6] %> </td>
+    <td>End: <%= @wladder.last %> </td>
   </tr>
   
 </table>
