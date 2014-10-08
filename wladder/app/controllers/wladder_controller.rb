@@ -18,7 +18,7 @@ def check
   @wladder[5] = params[:step5]
   @wladder[6] = params[:step6]
   @result = "You lose!"  
-  @result = "You win!" if legal @wladder
+  @result = "You win!" if legal @wladder.compact
 
 end
 
