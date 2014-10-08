@@ -1,0 +1,20 @@
+<%= link_to "Play Again", root_path %>
+<h3>Your Guesses</h3>
+<table>
+  <tr>
+    <td>Start: <%= @wladder[0] %> </td>
+  </tr>
+  <% i = 0 %>  
+  <% for i in 1..5 do %>  
+      <% if @wladder[i] != "" %>
+        <td>Step <%= i %>: </td>
+        <td><%= @wladder[i] %>
+      <% end %>
+    </tr>
+  <% end %>
+  <tr>
+    <td>End: <%= @wladder[6] %> </td>
+  </tr>
+  
+</table>
+<h3>Result: <%= @result %> </h3>
