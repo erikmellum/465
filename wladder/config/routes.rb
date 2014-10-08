@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root "wladder#index"
 
-  get 'query', to: 'wladder#check'
+  get 'check', to: 'wladder#check'
 
 
   # The priority is based upon order of creation: first created -> highest priority.

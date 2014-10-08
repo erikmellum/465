@@ -1,6 +1,5 @@
 class WladderController < ApplicationController
 
-require "#{Rails.root}/lib/words5.rb"
 require "#{Rails.root}/lib/ladder.rb"
 
 def index

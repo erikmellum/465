@@ -7,10 +7,10 @@
 
 # only load one dictionary
 # load the dictionary of 4-letter words
-load "#{Rails.root}/lib/words4.rb"
+# load "#{Rails.root}/lib/words4.rb"
 
 # load the dictionary of 5-letter words
-#load "#{Rails.root}/lib/words5.rb"
+load "#{Rails.root}/lib/words5.rb"
 
 # return true if the two strings differ by only one letter
 def edit_distance_of_one word1, word2
