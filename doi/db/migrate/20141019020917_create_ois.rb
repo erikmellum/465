@@ -3,7 +3,6 @@ class CreateOis < ActiveRecord::Migration
     create_table :ois do |t|
       t.string :name
       t.string :description
-      t.string :string
 
       t.timestamps
     end
