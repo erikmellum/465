@@ -10,12 +10,14 @@ class OisController < ApplicationController
   # GET /ois/1
   # GET /ois/1.json
   def show
+    @url = @oi.urls.new
   end
 
   # GET /ois/new
   def new
     @oi = Oi.new
-  end
+    @oi.urls.new 
+   end
 
   # GET /ois/1/edit
   def edit
@@ -65,6 +67,6 @@ class OisController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def oi_params
-      params.require(:oi).permit(:name, :description)
+      params.require(:oi).permit(:name, :description, urls_attributes: [:url])
     end
 end
