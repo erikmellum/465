@@ -1,5 +1,6 @@
-
-<%= form_for(@oi, class: 'form-inline') do |f| %>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<%= form_for(@oi, class: 'form-vertical') do |f| %>
   <% if @oi.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@oi.errors.count, "error") %> prohibited this oi from being saved:</h2>
@@ -12,20 +13,19 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="field form-group">
     <%= f.label :name %><br>
-    <%= f.text_field :name %>
+    <%= f.text_field :name,class: 'form-control', placeholder: 'Name'  %>
   </div>
-  <div class="field">
+  <div class="field form-group">
     <%= f.label :description %><br>
-    <%= f.text_field :description %>
+    <%= f.text_field :description, class: 'form-control', placeholder: 'Description' %>
   </div>
   <%= f.fields_for :urls do |urls_form| %>
-    <h3>Edit Url</h3>
-    <div style="margin-left: 30px;">
-      <div class="field">
+    <div style="">
+      <div class="field form-group">
         <%= urls_form.label :url %><br>
-        <%= urls_form.text_field :url %>
+        <%= urls_form.text_field :url, class: 'form-control' %>
       </div>   
    </div>
   <% end %>
