@@ -21,7 +21,8 @@
     <%= f.label :description %><br>
     <%= f.text_field :description, class: 'form-control', placeholder: 'Description' %>
   </div>
-  <%= f.fields_for :urls do |urls_form| %>
+<% if @oi.urls.last.new_record? %>  
+<%= f.fields_for :urls do |urls_form| %>
     <div style="">
       <div class="field form-group">
         <%= urls_form.label :url %><br>
@@ -29,7 +30,7 @@
       </div>   
    </div>
   <% end %>
-
+<% end %>
   <div class="actions">
     <%= f.submit %>
   </div>
