@@ -1,0 +1,36 @@
+
+<%= form_for(@oi, class: 'form-inline') do |f| %>
+  <% if @oi.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@oi.errors.count, "error") %> prohibited this oi from being saved:</h2>
+
+      <ul>
+      <% @oi.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_field :description %>
+  </div>
+  <%= f.fields_for :urls do |urls_form| %>
+    <h3>Edit Url</h3>
+    <div style="margin-left: 30px;">
+      <div class="field">
+        <%= urls_form.label :url %><br>
+        <%= urls_form.text_field :url %>
+      </div>   
+   </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

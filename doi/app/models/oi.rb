@@ -1,8 +1,25 @@
 class Oi < ActiveRecord::Base
-  has_many :urls, dependent: destroy
 
-  def name
+has_many :urls, dependent: :destroy
+accepts_nested_attributes_for :urls
+
+  def pName
     name
   end
+  
+  def created
+    created_at
+  end
 
+  def updated
+    updated_at 
+  end
+
+  def pId
+    uid
+  end
+
+  def self.search(search)
+    where('name LIKE ?',"%#{search}%")
+  end
 end

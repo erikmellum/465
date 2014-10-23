@@ -16,6 +16,7 @@ ActiveRecord::Schema.define(version: 20141019020937) do
   create_table "ois", force: true do |t|
     t.string   "name"
     t.string   "description"
+    t.string   "uid"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

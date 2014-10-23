@@ -5,7 +5,10 @@ class OisController < ApplicationController
   # GET /ois.json
   def index
     @ois = Oi.all
-  end
+    if params[:search]
+      @ois = Oi.search(params[:search])
+    end
+   end
 
   # GET /ois/1
   # GET /ois/1.json
@@ -27,7 +30,19 @@ class OisController < ApplicationController
   # POST /ois.json
   def create
     @oi = Oi.new(oi_params)
-
+    @ois = Oi.all
+    test = true
+    while(test)
+      
+      a = *(100000..1000000)
+      @oi.id = a.sample
+      test = false
+      @ois.each do |doi|
+        if(doi.id == @oi.id)
+          test = true
+        end
+      end
+    end
     respond_to do |format|
       if @oi.save
         format.html { redirect_to @oi, notice: 'Oi was successfully created.' }

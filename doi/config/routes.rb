@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  resources :urls
+
+  resources :ois
+
   resources :ois do
     resources :urls, shallow: true
   end 

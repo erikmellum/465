@@ -1,0 +1,43 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>
+  <%= @oi.name %>: 
+  </strong>
+  <%= @oi.description %>
+  <br>
+  Unique Id:<%= @oi.id %>
+</p>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Url</th>
+      <th>Date Created</th>
+      <th>Date Updated</th>
+      <th colspan="4"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @oi.urls.each do |url| %>
+      <% if !url.new_record? %>
+      <tr>
+        <td><%= url.url %></td>
+        <td><%= url.created %></td> 
+        <td><%= url.updated %></td> 
+        <td><%= link_to 'Edit', edit_url_path(url) %></td>
+        <td><%= link_to 'Destroy', url, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+      <% end %>
+    <% end %>
+  </tbody> 
+</table>
+<br>
+<br>
+<%= link_to 'New Url', new_oi_url_path(@oi) %>
+<%= link_to 'Edit', edit_oi_path(@oi) %> |
+<%= link_to 'Back', ois_path %>
