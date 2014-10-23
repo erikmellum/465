@@ -1,5 +1,6 @@
 class Oi < ActiveRecord::Base
-
+  validates :name, presence: true
+  validates :description, presence: true
 has_many :urls, dependent: :destroy
 accepts_nested_attributes_for :urls
 
