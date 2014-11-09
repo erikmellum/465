@@ -12,18 +12,25 @@
 
   <tbody>
     <% @images.each do |image| %>
+      
+      <% if((user_signed_in? && current_user == image.user) || image.public_private) %>
+    
       <tr>
         <td><%= image.filename %></td>
         <td><%= image.public_private %></td>
         <td><%= image.user %></td>
+        <td><%= image_tag root_url + "/images/" + image.filename, size: "100x100", alt: image.filename %>
         <td><%= link_to 'Show', image %></td>
-        <td><%= link_to 'Edit', edit_image_path(image) %></td>
+        <% if image.user == current_user %> 
         <td><%= link_to 'Destroy', image, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>
 
 <br>
-
-<%= link_to 'New Image', new_image_path %>
+<% if user_signed_in? %>
+<%= link_to 'New Image', new_image_path %> 
+<% end %>
