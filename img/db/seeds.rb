@@ -5,3 +5,29 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+users = User.create(
+  [
+    { email: 'a@a.com', password: 'a', password_confirmation: 'a'},
+    { email: 'b@b.com', password: 'b', password_confirmation: 'b'},
+    { email: 'c@c.com', password: 'c', password_confirmation: 'c'}
+  ]
+)
+images = Image.create(
+  [
+    {filename: "SomeName"},
+    {filename: "I wish I had more time learn rails"}
+  ]
+
+)
+accesses = Access.create(
+  [
+    {image_id: 1}
+  ]
+)
+
+tags = Tag.create(
+  [
+    {tag_string: "My Tag"}
+  ]
+)
+
