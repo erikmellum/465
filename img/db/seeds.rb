@@ -14,8 +14,8 @@ users = User.create(
 )
 images = Image.create(
   [
-    {filename: "SomeName", public_private: true},
-    {filename: "AnImage", public_private: false}
+   # {filename: "SomeName", public_private: true},
+   # {filename: "AnImage", public_private: false}
   ]
 
 )
