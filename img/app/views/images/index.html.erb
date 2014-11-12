@@ -2,11 +2,10 @@
 
 <table>
   <thead>
-    <tr>
-      <th>Filename</th>
-      <th>Public private</th>
-      <th>User</th>
-      <th colspan="3"></th>
+    <tr>  
+      <th>User</th>     
+      <th>Tags</th>
+     `<th colspan="3"></th>
     </tr>
   </thead>
 
@@ -16,14 +15,17 @@
       <% if((user_signed_in? && current_user == image.user) || image.public_private) %>
     
       <tr>
-        <td><%= image.filename %></td>
-        <td><%= image.public_private %></td>
-        <td><%= image.user %></td>
+        <td><%= image.user.name %></td>
+	<td><% image.tags.each do |tag| %>
+	  <span><%= tag.tag_string %>
+	<% end %></td>
         <td><%= image_tag root_url + "/images/" + image.filename, size: "100x100", alt: image.filename %>
+        <% #if user_signed_in? %>
         <td><%= link_to 'Show', image %></td>
         <% if image.user == current_user %> 
         <td><%= link_to 'Destroy', image, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <% end %>
+        <%# end %>  
+      <% end %>
       </tr>
       <% end %>
     <% end %>
