@@ -7,9 +7,9 @@
     <span><%= tag.tag_string %> </span>
  <% end %>
  </p>
-<p><%= image_tag root_url + "/images/" + @image.filename, size: "100x100", alt: @image.filename %></p>
+<p><%= image_tag root_url + "/images/" + @image.filename, alt: @image.filename %></p>
 
-
+ 
  <% if @image.user == current_user %>
    <%= render 'form' %>
    <p><%= link_to 'Destroy', @image, method: :delete, data: { confirm: 'Are you sure?' } %></p>
