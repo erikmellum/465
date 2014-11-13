@@ -1,15 +1,29 @@
 <p id="notice"><%= notice %></p>
 
 <p><strong>User</strong></p>
- <p><%= @image.user.name %></p>
-<p><strong>Tags</strong></p> 
- <p><% @image.tags.each do |tag| %>
-    <span><%= tag.tag_string %> </span>
- <% end %>
- </p>
+<p><%= @image.user.name %></p>
+
 <p><%= image_tag root_url + "/images/" + @image.filename, alt: @image.filename %></p>
 
- 
+<table>
+  <tbody>
+    <% @image.tags.each do |tag| %>
+      <% if !tag.new_record? %>
+       <tr>
+        <td><%= tag.tag_string %></td>
+        <% if @image.public? ||  %>
+	<td><%= link_to 'Edit', edit_tag_path(tag) %></td>
+        <td><%= link_to 'Destroy', tag, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>  
+      </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+
+<h3>Create new Tag</h3>
+<%= render 'tags/form' %>
+ <br>
  <% if @image.user == current_user %>
    <%= render 'form' %>
    <p><%= link_to 'Destroy', @image, method: :delete, data: { confirm: 'Are you sure?' } %></p>
