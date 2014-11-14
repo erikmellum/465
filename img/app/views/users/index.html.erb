@@ -1,0 +1,41 @@
+<div class="container">
+<% if user_signed_in? %>
+<h2 class="center"><%= link_to 'New Image', new_image_path %> </h2>
+<% end %>
+
+<h1 class="center"><%= current_user.name %>'s Pictures</h1>
+<div class="row">
+
+<% @user_images.each do |image| %>
+<div class="picture col-lg-2">
+<span><%= link_to (image_tag root_url + "/images/" + image.filename, size: "100x100", alt: image.filename), image %></span>
+
+<p>Owner:<%= image.user.name %></p>
+<span><%= link_to 'Destroy', image, method: :delete, data: { confirm: 'Are you sure?' } %></span>
+</div>
+<% end %>
+</div>
+<div class="row">
+<h1 class="center">Private Images</h1>
+<% @private_images.each do |image| %>
+<div class="picture col-lg-2">
+<span><%= link_to (image_tag root_url + "/images/" + image.filename, size: "100x100", alt: image.filename), image %></span>
+
+<p>Owner:<%= image.user.name %></p>
+<span><%= link_to 'Destroy', image, method: :delete, data: { confirm: 'Are you sure?' } %></span>
+</div>
+<% end %>
+</div>
+<div class="row">
+<h1 class="center">Public Images</h1>
+<% @public_images.each do |image| %>
+<div class="picture col-lg-2">
+<span><%= link_to (image_tag root_url + "/images/" + image.filename, size: "100x100", alt: image.filename), image %></span>
+<p>Owner:<%= image.user.name %></p>
+<span><%= link_to 'Destroy', image, method: :delete, data: { confirm: 'Are you sure?' } %></span>
+</div>
+<% end %>
+<br>
+
+</div>
+</div>

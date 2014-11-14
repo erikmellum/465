@@ -9,7 +9,7 @@ class ImagesController < ApplicationController
     if params[:search]
       @tags = Tag.search(params[:search])
       @tags.each do |tag| 
-        @images.push tag.image
+       @images.push tag.image
       end
 
     end

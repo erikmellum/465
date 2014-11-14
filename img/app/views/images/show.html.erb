@@ -13,11 +13,10 @@
 <div class="col-lg-2 col-lg-offset-2">
   <%= render 'form' %>
   <p><%= link_to 'Destroy', @image, method: :delete, data: { confirm: 'Are you sure?' } %></p>
-   <%= link_to 'Back to all images', images_path %>
-
+  
    </div>
 <% end %>
-<div class="col-lg-3<% if user_signed_in? != true %>col-lg-offset-2 <% end %>">
+<div class="col-lg-3<% if user_signed_in? != true %> col-lg-offset-4 <% end %>">
 <table>
   <tbody>
     <% @image.tags.each do |tag| %>
@@ -61,5 +60,6 @@
    <% end %> 
    
  <% end %>
+<h2><%= link_to 'Back to all images', images_path %></h2>
 </div>
 
