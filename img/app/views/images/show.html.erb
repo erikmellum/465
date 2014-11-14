@@ -16,7 +16,7 @@
   
    </div>
 <% end %>
-<div class="col-lg-3<% if user_signed_in? != true %> col-lg-offset-4 <% end %>">
+<div class="col-lg-3<% if user_signed_in? != true || current_user != @image.user%> col-lg-offset-4 <% end %>">
 <table>
   <tbody>
     <% @image.tags.each do |tag| %>

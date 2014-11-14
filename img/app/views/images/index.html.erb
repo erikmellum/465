@@ -12,7 +12,10 @@
         <p>Owner:<%= image.user.name %></p>
         <span><%= link_to (image_tag root_url + "/images/" + image.filename, size: "100x100", alt: image.filename), image %></span>
         <% if image.user == current_user %> 
-          <span><%= link_to 'Destroy', image, method: :delete, data: { confirm: 'Are you sure?' } %></span> 
+          <span><%= link_to 'Destroy', image, method: :delete, data: { confirm: 'Are you sure?' } %></span> <br>
+        <%image.tags.each do |tag| %>
+        <span><%=tag.tag_string%></span>
+         <%end%>
         <% end %>
       </div>
     <% end %>
