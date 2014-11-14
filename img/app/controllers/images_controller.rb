@@ -6,7 +6,8 @@ class ImagesController < ApplicationController
   def index
     @images = Image.all
     @users = User.all
-    if params[:search]
+    if params[:search] && params[:search].length > 0
+      @images = []  
       @tags = Tag.search(params[:search])
       @tags.each do |tag| 
        @images.push tag.image
