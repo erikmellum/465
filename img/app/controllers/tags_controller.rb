@@ -4,7 +4,8 @@ class TagsController < ApplicationController
   # GET /tags
   # GET /tags.json
   def index
-    @tags = Tag.all
+    @image = Image.find params[:image_id]
+    @tags = @image.tags
   end
 
   # GET /tags/1
@@ -14,7 +15,8 @@ class TagsController < ApplicationController
 
   # GET /tags/new
   def new
-    @tag = Tag.new
+    @image = Image.find params[:image_id]
+    @tag = @image.tags.new
   end
 
   # GET /tags/1/edit
@@ -24,11 +26,11 @@ class TagsController < ApplicationController
   # POST /tags
   # POST /tags.json
   def create
-    @tag = Tag.new(tag_params)
-
+    @image = Image.find params[:image_id]
+    @tag = @image.tags.new(tag_params)
     respond_to do |format|
       if @tag.save
-        format.html { redirect_to @tag, notice: 'Tag was successfully created.' }
+        format.html { redirect_to image_url(@image), notice: 'Tag was successfully created.' }
         format.json { render :show, status: :created, location: @tag }
       else
         format.html { render :new }
@@ -42,7 +44,7 @@ class TagsController < ApplicationController
   def update
     respond_to do |format|
       if @tag.update(tag_params)
-        format.html { redirect_to @tag, notice: 'Tag was successfully updated.' }
+        format.html { redirect_to image_url(@tag.image), notice: 'Tag was successfully updated.' }
         format.json { render :show, status: :ok, location: @tag }
       else
         format.html { render :edit }
@@ -56,7 +58,7 @@ class TagsController < ApplicationController
   def destroy
     @tag.destroy
     respond_to do |format|
-      format.html { redirect_to tags_url, notice: 'Tag was successfully destroyed.' }
+      format.html { redirect_to image__url(@tag.image), notice: 'Tag was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

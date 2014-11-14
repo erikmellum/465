@@ -4,7 +4,9 @@ class AccessesController < ApplicationController
   # GET /accesses
   # GET /accesses.json
   def index
-    @accesses = Access.all
+   @users = User.all
+   @image = Image.find params[:image_id] 
+   @accesses = @image.accesses
   end
 
   # GET /accesses/1
@@ -14,21 +16,28 @@ class AccessesController < ApplicationController
 
   # GET /accesses/new
   def new
-    @access = Access.new
+    @users = User.all
+    @image = Image.find params[:image_id]
+    @access = @image.accesses.new
   end
 
   # GET /accesses/1/edit
   def edit
+    @access = Access.find params[:id]
+   
+    @users = User.all
   end
 
   # POST /accesses
   # POST /accesses.json
   def create
-    @access = Access.new(access_params)
-
+    @users = User.all
+    @image = Image.find params[:image_id]
+    @access = @image.accesses.new(access_params)
+    @access.user_id = params[:user_id]    
     respond_to do |format|
       if @access.save
-        format.html { redirect_to @access, notice: 'Access was successfully created.' }
+        format.html { redirect_to image_url(@image), notice: 'Access was successfully created.' }
         format.json { render :show, status: :created, location: @access }
       else
         format.html { render :new }
@@ -42,7 +51,7 @@ class AccessesController < ApplicationController
   def update
     respond_to do |format|
       if @access.update(access_params)
-        format.html { redirect_to @access, notice: 'Access was successfully updated.' }
+        format.html { redirect_to image_accesses_url(@access.image), notice: 'Access was successfully updated.' }
         format.json { render :show, status: :ok, location: @access }
       else
         format.html { render :edit }
@@ -56,7 +65,7 @@ class AccessesController < ApplicationController
   def destroy
     @access.destroy
     respond_to do |format|
-      format.html { redirect_to accesses_url, notice: 'Access was successfully destroyed.' }
+      format.html { redirect_to image_url(@access.image), notice: 'Access was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -69,6 +78,6 @@ class AccessesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def access_params
-      params.require(:access).permit(:image_id, :user_id)
+      params.permit(:image_id, :user_id)
     end
 end
