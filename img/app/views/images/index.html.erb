@@ -1,20 +1,10 @@
-<h1>Listing images</h1>
-
-<table>
-  <thead>
-    <tr>  
-      <th>User</th>     
-      <th>Tags</th>
-     `<th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
+<div class="container">
+<h1>Listing images</h1> 
     <% @images.each do |image| %>
       
       <% if((user_signed_in? && current_user == image.user) || image.public_private) %>
     
-      <tr>
+  <div class="picture col-lg-1"> 
         <td><%= image.user.name %></td>
 	<td><% image.tags.each do |tag| %>
 	  <span><%= tag.tag_string %>
@@ -26,14 +16,18 @@
         <% if image.user == current_user %> 
         <td><%= link_to 'Destroy', image, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <%# end %>  
+        
       <% end %>
-      </tr>
+     
       <% end %>
-    <% end %>
-  </tbody>
-</table>
+     </div>
 
-<br>
+    <% end %>
+</div>
 <% if user_signed_in? %>
 <%= link_to 'New Image', new_image_path %> 
 <% end %>
+
+</div>
+<br>
+
