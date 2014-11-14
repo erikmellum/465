@@ -1,17 +1,30 @@
-<p id="notice"><%= notice %></p>
-
-<p><strong>User</strong></p>
-<p><%= @image.user.name %></p>
+<div class="row">
+<div class="smallContainer">
+   <p class="center" id="notice"><%= notice %></p>
+</div> 
+<div class="col-lg-10 col-lg-offset-4">
+<p><strong>User</strong> <%= @image.user.name %></p>
 
 <p><%= image_tag root_url + "/images/" + @image.filename, alt: @image.filename %></p>
+</div>
+</div>
+<div class="row">
+<% if current_user == @image.user %>
+<div class="col-lg-2 col-lg-offset-2">
+  <%= render 'form' %>
+  <p><%= link_to 'Destroy', @image, method: :delete, data: { confirm: 'Are you sure?' } %></p>
+   <%= link_to 'Back to all images', images_path %>
 
+   </div>
+<% end %>
+<div class="col-lg-3<% if user_signed_in? != true %>col-lg-offset-2 <% end %>">
 <table>
   <tbody>
     <% @image.tags.each do |tag| %>
       <% if !tag.new_record? %>
        <tr>
         <td><%= tag.tag_string %></td>
-        <% if @image.public? || current_user == @image.user  %>
+        <% if user_signed_in?|| current_user == @image.user  %>
 	<td><%= link_to 'Edit', edit_tag_path(tag) %></td>
         <td><%= link_to 'Destroy', tag, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <% end %>  
@@ -20,17 +33,33 @@
     <% end %>
   </tbody>
 </table>
-
+<% if user_signed_in? %>
 <h3>Create new Tag</h3>
 <%= render 'tags/form' %>
- <br>
+</div>
+<% end %>
  <% if @image.user == current_user %>
    <% if !@image.public? %>
-   <%= render 'accesses/form' %>
+   <div class="col-lg-3">
+     <p>Have access</p>
+      <table>
+
+  <tbody>
+    <% @image.accesses.each do |access| %>
+      <tr>
+ <% if !access.new_record? %>
+        <td><%= access.user.email   %></td> 
+        <td><%= link_to 'Destroy', access, method: :delete, data: { confirm: 'Are you sure?' } %></td> 
+<% end %>
+     </tr>
+    <% end %>
+  </tbody>
+</table>
+     <p>Do not yet have access</p> 
+     <%= render 'accesses/form' %>
+   </div>
    <% end %> 
-   <%= render 'form' %> 
-  <p><%= link_to 'Destroy', @image, method: :delete, data: { confirm: 'Are you sure?' } %></p>
-
+   
  <% end %>
+</div>
 
-<%= link_to 'Back', images_path %>

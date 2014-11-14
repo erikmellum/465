@@ -6,7 +6,18 @@ class ImagesController < ApplicationController
   def index
     @images = Image.all
     @users = User.all
+    if params[:search]
+      @tags = Tag.search(params[:search])
+      @tags.each do |tag| 
+        @images.push tag.image
+      end
+
+    end
+
+ 
   end
+
+
 
   # GET /images/1
   # GET /images/1.json

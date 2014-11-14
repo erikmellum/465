@@ -1,33 +1,31 @@
 <div class="container">
-<h1>Listing images</h1> 
-    <% @images.each do |image| %>
-      
-      <% if((user_signed_in? && current_user == image.user) || image.public_private) %>
-    
-  <div class="picture col-lg-1"> 
-        <td><%= image.user.name %></td>
-	<td><% image.tags.each do |tag| %>
-	  <span><%= tag.tag_string %>
-	<% end %></td>
-       
-        <td><%= link_to (image_tag root_url + "/images/" + image.filename, size: "100x100", alt: image.filename), image %>
-        <% #if user_signed_in? %> 
-
+<div class="row">
+ <%= form_tag(images_path, :method => "get") do %> 
+ <%= text_field_tag :search, params[:search], placeholder: "Search" %> 
+ <%= submit_tag "Search" %> 
+ <% end %> 
+  <h1 class="center">Listing images</h1> 
+  <% @images.each do |image| %> 
+    <% if((user_signed_in? && current_user == image.user) || image.public_private) %>
+<%  @image_shown = true %>
+      <div class="picture col-lg-2"> 
+        <p>Owner:<%= image.user.name %></p>
+        <span><%= link_to (image_tag root_url + "/images/" + image.filename, size: "100x100", alt: image.filename), image %></span>
         <% if image.user == current_user %> 
-        <td><%= link_to 'Destroy', image, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <%# end %>  
-        
-      <% end %>
-     
-      <% end %>
-     </div>
-
+          <span><%= link_to 'Destroy', image, method: :delete, data: { confirm: 'Are you sure?' } %></span> 
+        <% end %>
+      </div>
     <% end %>
-</div>
-<% if user_signed_in? %>
-<%= link_to 'New Image', new_image_path %> 
-<% end %>
+  <% end %>
+  <% if !@image_shown %>
+   <br>
+   <p> No viewable images... create an accountor sign in to add images!</p>
+  <% end %>
+  <% if user_signed_in? %>
+    <br>
+    <h2 style="display: inline"><%= link_to 'New Image', new_image_path %> </h2>
+  <% end %>
 
 </div>
-<br>
 
+</div>
