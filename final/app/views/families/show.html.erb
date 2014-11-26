@@ -4,6 +4,13 @@
   <strong>Name:</strong>
   <%= @family.name %>
 </p>
-
+<ul>
+  <% @family.members.each do |member| %>
+    <li>
+    <%= link_to member.name, member_path %>
+    </li>
+  <% end %>
+</ul>
+<%= link_to 'Add member to family',  new_family_member_path(params[:id]) %>
 <%= link_to 'Edit', edit_family_path(@family) %> |
 <%= link_to 'Back', families_path %>

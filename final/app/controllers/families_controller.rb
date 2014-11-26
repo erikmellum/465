@@ -10,6 +10,9 @@ class FamiliesController < ApplicationController
   # GET /families/1
   # GET /families/1.json
   def show
+    @family = Family.find params[:id]
+    @members = @family.members
+    @member = @family.members.new
   end
 
   # GET /families/new

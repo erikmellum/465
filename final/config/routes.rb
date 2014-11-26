@@ -1,20 +1,19 @@
 Rails.application.routes.draw do
-  resources :tags
+  devise_for :users
 
-  resources :hobbies
+  resources :images do
+    resources :tags, shallow: true
+  end
 
-  resources :milestones
-
-  resources :relationships
-
-  resources :images
-
-  resources :events
-
-  resources :members
-
-  resources :families
-
+  resources :families do
+    resources :members, shallow: true do
+      resources :hobbies, shallow: true
+      resources :milestones, shallow: true
+      resources :relationships, shallow: true
+    end
+    resources :events, shallow: true
+    resources :images, shallow: true
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -70,4 +69,5 @@ Rails.application.routes.draw do
   #     resources :products
   #   end
   root 'families#index'
+  get '/', to: 'families#index'
 end

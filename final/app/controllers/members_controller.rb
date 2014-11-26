@@ -14,7 +14,8 @@ class MembersController < ApplicationController
 
   # GET /members/new
   def new
-    @member = Member.new
+     @family = Family.find params[:family_id]    
+     @member = @family.members.new    
   end
 
   # GET /members/1/edit
@@ -25,7 +26,7 @@ class MembersController < ApplicationController
   # POST /members.json
   def create
     @member = Member.new(member_params)
-
+    @member.family = Family.find(params[:family_id])
     respond_to do |format|
       if @member.save
         format.html { redirect_to @member, notice: 'Member was successfully created.' }
