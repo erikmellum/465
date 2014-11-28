@@ -19,5 +19,7 @@
   <strong>Member Family:</strong>
   <%= @member.family %>
 </p>
+
+<%= link_to 'Add Relationship', new_member_relationship_path(params[:id]) %>
 <%= link_to 'Edit', edit_member_path(@member) %> |
-<%= link_to 'Back', family_path(@member.family) %>
+<%= link_to 'Back', family_path(@member.family_id) %>

@@ -6,11 +6,18 @@
 </p>
 <ul>
   <% @family.members.each do |member| %>
-    <li>
-    <%= link_to member.name, member_path %>
-    </li>
+    <% if !member.new_record? %>
+       <li>
+        <%= link_to member.name, member_path %>
+      </li>
+    <% end %>
   <% end %>
 </ul>
 <%= link_to 'Add member to family',  new_family_member_path(params[:id]) %>
+<%= link_to 'Create new event', new_family_event_path(params[:id]) %>
+<%= link_to 'View Events', family_events_path(params[:id]) %>
+<%= link_to 'View family members', family_events_path(params[:id]) %>
+<%= link_to 'View family units', family_events_path(params[:id]) %>
 <%= link_to 'Edit', edit_family_path(@family) %> |
 <%= link_to 'Back', families_path %>
+

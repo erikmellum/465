@@ -14,7 +14,8 @@ class RelationshipsController < ApplicationController
 
   # GET /relationships/new
   def new
-    @relationship = Relationship.new
+    @member = Member.find(params[:member_id])
+    @relationship = @member.relationships.new
   end
 
   # GET /relationships/1/edit
@@ -24,11 +25,13 @@ class RelationshipsController < ApplicationController
   # POST /relationships
   # POST /relationships.json
   def create
-    @relationship = Relationship.new(relationship_params)
-
+    @member = Member.find(params[:member_id])
+    @relationship = @member.relationships.new(relationship_params)
+    #Member 2 is the member that is also part of this relationship
+#    @member2 = Member.find(params[:member])
     respond_to do |format|
       if @relationship.save
-        format.html { redirect_to @relationship, notice: 'Relationship was successfully created.' }
+        format.html { redirect_to @member, notice: 'Relationship was successfully created.' }
         format.json { render :show, status: :created, location: @relationship }
       else
         format.html { render :new }
@@ -42,7 +45,7 @@ class RelationshipsController < ApplicationController
   def update
     respond_to do |format|
       if @relationship.update(relationship_params)
-        format.html { redirect_to @relationship, notice: 'Relationship was successfully updated.' }
+        format.html { redirect_to @member, notice: 'Relationship was successfully updated.' }
         format.json { render :show, status: :ok, location: @relationship }
       else
         format.html { render :edit }
