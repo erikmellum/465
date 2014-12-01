@@ -8,7 +8,7 @@
   <% @family.members.each do |member| %>
     <% if !member.new_record? %>
        <li>
-        <%= link_to member.name, member_path %>
+        <%= link_to member.name, member_path(member) %>
       </li>
     <% end %>
   <% end %>

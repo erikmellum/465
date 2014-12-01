@@ -5,4 +5,6 @@ class Member < ActiveRecord::Base
   has_many :images, dependent: :destroy
   has_many :milestones, dependent: :destroy
   has_many :hobbies, dependent: :destroy
+
+  
 end

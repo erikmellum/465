@@ -4,7 +4,8 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    @events = Event.all
+    @family = Family.find(params[:family_id])
+    @events = @family.events
   end
 
   # GET /events/1

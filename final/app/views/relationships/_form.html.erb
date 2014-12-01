@@ -15,6 +15,15 @@
     <%= f.label :name %><br>
     <%= f.text_field :name %>
   </div>
+
+  <div class="field">
+    <select name="relationship_member_id">
+    <%= @eligible_members.each do |u| %>
+      <option value=<%=u.id%>><%=u.name%></option>
+    <% end %>
+    </select>
+  </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>

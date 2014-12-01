@@ -4,7 +4,8 @@ class RelationshipsController < ApplicationController
   # GET /relationships
   # GET /relationships.json
   def index
-    @relationships = Relationship.all
+    @member = Member.find(params[:member_id])
+    @relationships = @member.relationships
   end
 
   # GET /relationships/1
@@ -15,7 +16,18 @@ class RelationshipsController < ApplicationController
   # GET /relationships/new
   def new
     @member = Member.find(params[:member_id])
-    @relationship = @member.relationships.new
+    @relationship = Relationships.new
+    @eligible_members = []
+    Member.all.each do |m|
+      relationship_flag = false  
+      m.relationships.each do |r|
+        if r.member_two == @member
+          relationship_flag = true;
+        end
+      end  
+      @eligible_members << m if relationship_flag == false  
+    end
+    @eligible_members - [@member]
   end
 
   # GET /relationships/1/edit
@@ -26,7 +38,9 @@ class RelationshipsController < ApplicationController
   # POST /relationships.json
   def create
     @member = Member.find(params[:member_id])
-    @relationship = @member.relationships.new(relationship_params)
+    @relationship = Relationship.new(relationship_params)
+    @relationship.member_one = @member
+    @relationship.member_two = params[:relationship_member_id]
     #Member 2 is the member that is also part of this relationship
 #    @member2 = Member.find(params[:member])
     respond_to do |format|
