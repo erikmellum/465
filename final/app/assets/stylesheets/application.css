@@ -87,4 +87,12 @@
   background: #E8F1D4;
   z-index: 2;
 }
-
+.form-basic {
+  position: relative;
+  padding: 20px;
+  width: calc(100%-40px);
+  margin: 0 auto;
+  text-align: center;
+  min-width: 350px;
+  background: #EFEFEF;
+}
