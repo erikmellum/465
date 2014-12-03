@@ -1,27 +1,17 @@
 <h1>Listing images</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Description</th>
-      <th>User</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
 
-  <tbody>
     <% @images.each do |image| %>
-      <tr>
-        <td><%= image.description %></td>
-        <td><%= image.user %></td>
-        <td><%= link_to 'Show', image %></td>
-        <td><%= link_to 'Edit', edit_image_path(image) %></td>
-        <td><%= link_to 'Destroy', image, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+        <div><%= image.description %></div>
+        <div><%= image_tag root_url + "/images/" + image.filename, size: '100x100', alt: image.filename %></div>
+        <div>
+        <span><%= link_to (raw("<i class='fa fa-search'></i>")), image %></span>
+        <span><%= link_to (raw("<i class='fa fa-edit'></i>")), edit_image_path(image) %></span>
+        <span><%= link_to (raw("<i class='fa fa-remove'></i>")), image, method: :delete, data: { confirm: 'Are you sure?' } %></span>
+        </div>
     <% end %>
-  </tbody>
-</table>
 
 <br>
 
 <%= link_to 'New Image', new_image_path %>
+<%= link_to 'Back', family_path(@images.first.family) %>

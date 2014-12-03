@@ -11,6 +11,7 @@ class EventsController < ApplicationController
   # GET /events/1
   # GET /events/1.json
   def show
+    @family = @event.family
   end
 
   # GET /events/new
@@ -30,7 +31,7 @@ class EventsController < ApplicationController
     @event = @family.events.new(event_params)
     respond_to do |format|
       if @event.save
-        format.html { redirect_to @family, notice: 'Event was successfully created.' }
+        format.html { redirect_to @event, notice: 'Event was successfully created.' }
         format.json { render :show, status: :created, location: @event }
       else
         format.html { render :new }
@@ -58,7 +59,7 @@ class EventsController < ApplicationController
   def destroy
     @event.destroy
     respond_to do |format|
-      format.html { redirect_to events_url, notice: 'Event was successfully destroyed.' }
+      format.html { redirect_to family_url(@event.family), notice: 'Event was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -71,6 +72,6 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.require(:event).permit(:name, :location, :date)
+      params.permit(:name, :location, :date)
     end
 end

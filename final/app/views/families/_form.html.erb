@@ -16,6 +16,13 @@
     <%= f.label :name %><br>
     <%= f.text_field :name, class: 'form-control'%>
   </div>
+  
+  <div class="field">
+     <%= f.label "Picture" %><br>
+     <%= f.file_field :uploaded_file %>
+  </div>
+
+
   <div class="actions">
     <%= f.submit %>
   </div>

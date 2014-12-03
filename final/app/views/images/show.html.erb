@@ -1,14 +1,24 @@
-<p id="notice"><%= notice %></p>
 
-<p>
+<div class="showImage">
+<%= image_tag root_url + "/images/" + @image.filename, alt: @image.filename, id: 'mainImageShow' %>
+<p >
   <strong>Description:</strong>
   <%= @image.description %>
 </p>
 
-<p>
-  <strong>User:</strong>
-  <%= @image.user %>
-</p>
-
+    <% @image.tags.each do |tag| %>
+      <% if !tag.new_record? %>
+       <div class="tag">
+        <span><%= tag.name %></span>
+	<td><%= link_to edit_tag_path(tag) do  %>
+           <i class="fa fa-edit"></i>
+        </td><% end %>
+        <span><%= link_to (raw("<i class='fa fa-remove'></i>")), tag, method: :delete, data: { confirm: 'Are you sure?' } %></span>
+      </div>
+      <% end %>
+    <% end %>
+<h3>Create new Tag</h3>
+<%= render 'tags/form' %>
 <%= link_to 'Edit', edit_image_path(@image) %> |
 <%= link_to 'Back', images_path %>
+</div>

@@ -11,6 +11,9 @@
   <tbody>
     <% @families.each do |family| %>
       <tr>
+        <% if family.images.length > 0  %>
+        <td><%= image_tag root_url + "/images/" + family.images[0].filename, size: "100x100", alt: family.images[0].filename %></td>
+        <% end %>
         <td><%= family.name %></td>
         <td><%= link_to 'Show', family %></td>
         <td><%= link_to 'Edit', edit_family_path(family) %></td>

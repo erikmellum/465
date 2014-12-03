@@ -10,6 +10,8 @@ class ImagesController < ApplicationController
   # GET /images/1
   # GET /images/1.json
   def show
+    @image = Image.find params[:id]
+    @tag = @image.tags.new
   end
 
   # GET /images/new
@@ -25,7 +27,20 @@ class ImagesController < ApplicationController
   # POST /images.json
   def create
     @image = Image.new(image_params)
+    if @params[:family_id]
+      @image.family = Family.find(params[:family_id]) 
+    elsif @params[:member_id]
+      @image.member = Member.find(params[:member_id])
+    elsif @params[:event_id]
+      @image.event = Event.find(params[:event_id])
+    end
+    @image.generate_filename
+    @tag = Tag.new
+    @uploaded_io = params[:image][:uploaded_file]
 
+    File.open(Rails.root.join('public', 'images', @image.filename), 'wb') do |file|
+      file.write(@uploaded_io.read)
+    end
     respond_to do |format|
       if @image.save
         format.html { redirect_to @image, notice: 'Image was successfully created.' }

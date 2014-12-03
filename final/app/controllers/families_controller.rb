@@ -13,11 +13,13 @@ class FamiliesController < ApplicationController
     @family = Family.find params[:id]
     @members = @family.members
     @member = @family.members.new
+    @image = @family.images.new
   end
 
   # GET /families/new
   def new
     @family = Family.new
+    @image = @family.images.new
   end
 
   # GET /families/1/edit
@@ -28,6 +30,13 @@ class FamiliesController < ApplicationController
   # POST /families.json
   def create
     @family = Family.new(family_params)
+    @image = @family.images.new
+    @image.generate_filename
+    @uploaded_io = params[:family][:uploaded_file]
+
+    File.open(Rails.root.join('public', 'images', @image.filename), 'wb') do |file|
+      file.write(@uploaded_io.read)
+    end
 
     respond_to do |format|
       if @family.save
