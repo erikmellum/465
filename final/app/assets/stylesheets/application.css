@@ -13,20 +13,26 @@
  *= require_tree .
  *= require_self
  */
-
+@import url(http://fonts.googleapis.com/css?family=Roboto+Condensed);
 * {
  margin: 0;
  padding: 0;
-
+ font-family: 'Roboto Condensed', sans-serif;
 }
 #body {
   background: #CFD784;
 }
 #notification { 
-  color: red;
+  color: #C1D3D7;
+  font-weight: bold;
+  font-size: 115%;
+
   position: relative;
   top: 50px;
-  background: #F4F776;
+  left: 12%;
+  width: 60% !important;
+  margin: 0 auto;
+  background: #BC957F;
   width: 100%;
   z-index: 2;
 }
@@ -90,6 +96,7 @@
 .form-basic {
   position: relative;
   padding: 20px;
+  border-radius: 10px;
   width: calc(100%-40px);
   margin: 0 auto;
   text-align: center;
@@ -125,10 +132,17 @@
 .showImage{
   margin: 0 auto;
   text-align: center;
-  padding: 25px 0px;
-  border-radius: 10px;
   background: #333;
+  border: 5px solid #333;
   color: #FCFFF0;
+}
+img{
+  transition-property: transform;
+  transition-duration: .6s;
+  transition-timing: ease-out;
+}
+img:hover{
+  transform: scale(1.05);
 }
 .showImage input{ color: #333; }
 #mainImageShow{
@@ -149,4 +163,53 @@
   display:inline;
   padding: 5px;
   margin: 5px;
+}
+.imageBorder{
+  border: 5px solid #333;
+  max-height: 100px;
+}
+.fullWidth{
+  position: relative;
+  margin: 0 auto;
+  width: 60%;
+}
+.centerText{
+  text-align: center;
+}
+.margins{ 
+  margin: 10px 5px;
+}
+.padding{
+  padding: 10px;
+}
+.xpadding{
+  padding: 25px 0px;
+}
+a:hover{
+ background: #FCFFF0;
+}
+a{
+  color: #50A6C2 !important;
+
+}
+.smallerbox{
+  width: 400px;
+  border-radius: 10px;
+  transition-property: transform;
+  transition-duration: .4s;
+  transition-timing: ease-out;
+}
+.smallerbox:hover{
+ transform: scale(1.05);
+}
+input[type="submit"]{
+  transition-property: transform;
+  transition-duration: .3s;
+  transition-timing: ease-in;
+}
+input[type="submit"]{
+  transform: scale(1.1);
+}
+.greenBorder{
+  border: 5px solid #EFEFEF;
 }

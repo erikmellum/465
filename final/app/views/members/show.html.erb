@@ -5,6 +5,8 @@
   <%= @member.name %>
 </p>
 
+<%= link_to((image_tag root_url + "/images/" + @member.images[0].filename, class: "showImage margins", height: "250", alt: @member.images[0].filename), @member.images[0]) %>
+
 <p>
   <strong>Description:</strong>
   <%= @member.description %>
@@ -17,9 +19,11 @@
 
 <p>
   <strong>Member Family:</strong>
-  <%= @member.family %>
+  <%= @member.family.name %>
 </p>
 
-<%= link_to 'Add Relationship', new_member_relationship_path(params[:id]) %>
-<%= link_to 'Edit', edit_member_path(@member) %> |
-<%= link_to 'Back', family_path(@member.family_id) %>
+
+
+<%= link_to (raw("<button class='btn btn-default'>Add Relationship</button>")), new_member_relationship_path(params[:id]) %>
+<%= link_to (raw("<button class='btn btn-default'>Edit</button>")), edit_member_path(@member) %> 
+<%= link_to (raw("<button class='btn btn-default'>Back</button>")), family_path(@member.family_id) %>

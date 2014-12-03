@@ -16,6 +16,7 @@ class MembersController < ApplicationController
   def new
      @family = Family.find params[:family_id]    
      @member = @family.members.new    
+     @image = @member.images.new
   end
 
   # GET /members/1/edit
@@ -27,6 +28,13 @@ class MembersController < ApplicationController
   def create
     @family = Family.find(params[:family_id])
     @member = @family.members.new(member_params)
+    @image = @member.images.new
+    @image.generate_filename
+    @uploaded_io = params[:member][:uploaded_file]
+
+    File.open(Rails.root.join('public', 'images', @image.filename), 'wb') do |file|
+      file.write(@uploaded_io.read)
+    end
 
     respond_to do |format|
       if @member.save

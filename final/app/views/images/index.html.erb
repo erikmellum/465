@@ -1,16 +1,22 @@
 <h1>Listing images</h1>
 
-
-    <% @images.each do |image| %>
-        <div><%= image.description %></div>
-        <div><%= image_tag root_url + "/images/" + image.filename, size: '100x100', alt: image.filename %></div>
-        <div>
-        <span><%= link_to (raw("<i class='fa fa-search'></i>")), image %></span>
-        <span><%= link_to (raw("<i class='fa fa-edit'></i>")), edit_image_path(image) %></span>
-        <span><%= link_to (raw("<i class='fa fa-remove'></i>")), image, method: :delete, data: { confirm: 'Are you sure?' } %></span>
-        </div>
-    <% end %>
-
+    <% i = 0 %>
+    <div class="row">
+      <% @images.each do |image| %>
+        <% if i%3 == 0 %>
+          </div>
+          <div class="row">
+        <% end %> 
+        <% i=i+1 %>
+        <div class="col-lg-3">
+          <div><%= image.description %></div>
+          <div><%= link_to (image_tag root_url + "/images/" + image.filename, size: '100x100', class: "imageBorder", alt: image.filename), image %></div>
+          <span><%= link_to (raw("<i class='fa fa-search'></i>")), image %></span>
+          <span><%= link_to (raw("<i class='fa fa-edit'></i>")), edit_image_path(image) %></span>
+          <span><%= link_to (raw("<i class='fa fa-remove'></i>")), image, method: :delete, data: { confirm: 'Are you sure?' } %></span>
+        </div>  
+     <% end %>
+   </div>
 <br>
 
 <%= link_to 'New Image', new_image_path %>

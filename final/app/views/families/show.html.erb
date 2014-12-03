@@ -1,32 +1,28 @@
-<p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
+<h2>
   <%= @family.name %>
-</p>
-<ul>
-  <% @family.members.each do |member| %>
-    <% if !member.new_record? %>
-       <li>
-        <%= link_to member.name, member_path(member) %>
-      </li>
-    <% end %>
+</h2>
+<div class="row">
+  <div class="col-lg-6">
+    <%= link_to (image_tag root_url + "/images/" + @family.images[0].filename, class: "showImage", height: "220", alt: @family.images[0].filename), @family.images[0] %>
+  </div>
+  <%= @family.members.each do |member| %>
+   <% if !member.new_record? %>
+     <div class="col-lg-3">
+        <span><%= member.name %></span>
+        <%= link_to (image_tag root_url + "/images/" + member.images[0].filename, class: "imageBorder margins" , height: "100x100", alt: member.images[0].filename), member.images[0] %>
+     </div>
+   <% end %>
   <% end %>
-</ul>
-<div>
-  <%= image_tag root_url + "/images/" + @family.images[0].filename, size: "100x100", alt: @family.images[0].filename %>
-  <%= @family.name %><br>
-  <%= link_to 'Show', @family.images[0] %>
-  <%= link_to 'Edit', edit_image_path(@family.images[0]) %>
-  <%= link_to 'Destroy', @family.images[0], method: :delete, data: { confirm: 'Are you sure?' } %>
-
 </div>
-
-<%= link_to 'Add member to family',  new_family_member_path(params[:id]) %>
-<%= link_to 'Create new event', new_family_event_path(params[:id]) %>
-<%= link_to 'View Events', family_events_path(params[:id]) %>
-<%= link_to 'View family members', family_events_path(params[:id]) %>
-<%= link_to 'View family images', family_images_path(params[:id]) %>
-<%= link_to 'Edit', edit_family_path(@family) %> |
-<%= link_to 'Back', families_path %>
-
+<div class="row">
+<div class="centerText margins padding">
+<%= link_to (raw("<button class='btn btn-default margins'>Add Member</button>")),  new_family_member_path(params[:id]) %>
+<%= link_to (raw("<button class='btn btn-default margins'>Create Event</button")), new_family_event_path(params[:id]) %>
+<%= link_to (raw("<button class='btn btn-default margins'>View Events</button>")), family_events_path(params[:id]) %>
+<%= link_to (raw("<button class='btn btn-default margins'>View Family Members</button>")), family_events_path(params[:id]) %>
+<%= link_to (raw("<button class='btn btn-default margins'>View Family Images</button>")), family_images_path(params[:id]) %>
+<%= link_to (raw("<button class='btn btn-default margins'>Edit</button>")), edit_family_path(@family) %> 
+<%= link_to (raw("<button class='btn btn-default margins'>Back</button>")), families_path %>
+</div>
+</div>

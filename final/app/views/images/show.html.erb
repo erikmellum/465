@@ -1,6 +1,6 @@
 
-<div class="showImage">
-<%= image_tag root_url + "/images/" + @image.filename, alt: @image.filename, id: 'mainImageShow' %>
+<div>
+<%= image_tag root_url + "/images/" + @image.filename, class: "margins showImage", alt: @image.filename, id: 'mainImageShow' %>
 <p >
   <strong>Description:</strong>
   <%= @image.description %>
@@ -20,5 +20,5 @@
 <h3>Create new Tag</h3>
 <%= render 'tags/form' %>
 <%= link_to 'Edit', edit_image_path(@image) %> |
-<%= link_to 'Back', images_path %>
+<%= link_to 'Back', family_path(@image.family || @image.member.family) %>
 </div>
