@@ -28,6 +28,11 @@ class EventsController < ApplicationController
   # POST /events.json
   def create
     @family = Family.find(params[:family_id])
+    puts('*'*50)
+    puts(params)
+    puts('*'*50)
+    puts(event_params)
+    puts('*'*50)
     @event = @family.events.new(event_params)
     respond_to do |format|
       if @event.save
@@ -72,6 +77,6 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.permit(:name, :location, :date)
+      params.require(:event).permit(:name, :location, :date)
     end
 end

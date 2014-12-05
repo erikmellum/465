@@ -4,7 +4,18 @@ class ImagesController < ApplicationController
   # GET /images
   # GET /images.json
   def index
-    @images = Image.all
+    if(params[:family_id] != nil)
+    @family = Family.find(params[:family_id])
+    @images = Image.all.map{|image| image if(image.family == @family)}.compact
+    elsif(params[:member_id] != nil)
+      puts('*'*50)
+      puts('*'*50)
+      puts(params)
+      puts('*'*50)
+      puts('*'*50)
+      @member = Member.find(params[:member_id])
+      @images = Image.all.map{|image| image if(image.member == @member)}.compact
+    end
   end
 
   # GET /images/1
@@ -12,30 +23,54 @@ class ImagesController < ApplicationController
   def show
     @image = Image.find params[:id]
     @tag = @image.tags.new
+    @like = @image.likes.new
   end
 
   # GET /images/new
   def new
-    @image = Image.new
+    if params[:member_id] != nil
+    @member = Member.find(params[:member_id])
+    @image = @member.images.new
+    elsif params[:family_id] != nil
+    @family = Family.find(params[:family_id])
+    @image = @family.images.new
+    end
   end
 
   # GET /images/1/edit
   def edit
   end
 
+  def like
+    if(current_user.likes.map{|like| like if(like.user == current_user)}.compact.length == 0) 
+    @image = Image.find(params[:id])
+    @like = @image.likes.new(like_params)
+    @like.user = current_user
+    @image.save
+    end
+  end
+
+  def unlike
+    current_user.likes.each{|like| Like.delete(like) if(like.user == current_user)}
+  end
+
   # POST /images
   # POST /images.json
   def create
     @image = Image.new(image_params)
-    if @params[:family_id]
+    if params[:family_id] 
       @image.family = Family.find(params[:family_id]) 
-    elsif @params[:member_id]
+    elsif params[:member_id]
       @image.member = Member.find(params[:member_id])
-    elsif @params[:event_id]
+      puts('*'*50)
+      puts('*'*50)
+      puts(params)
+      puts('*'*50)
+      puts('*'*50)
+    elsif params[:event_id]
       @image.event = Event.find(params[:event_id])
     end
     @image.generate_filename
-    @tag = Tag.new
     @uploaded_io = params[:image][:uploaded_file]
 
     File.open(Rails.root.join('public', 'images', @image.filename), 'wb') do |file|
@@ -71,7 +106,7 @@ class ImagesController < ApplicationController
   def destroy
     @image.destroy
     respond_to do |format|
-      format.html { redirect_to images_url, notice: 'Image was successfully destroyed.' }
+      format.html { redirect_to member_url(@image.member), notice: 'Image was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

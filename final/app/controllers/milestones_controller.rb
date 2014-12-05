@@ -14,7 +14,8 @@ class MilestonesController < ApplicationController
 
   # GET /milestones/new
   def new
-    @milestone = Milestone.new
+    @member = Member.find(params[:member_id])
+    @milestone = @member.milestones.new
   end
 
   # GET /milestones/1/edit
@@ -24,8 +25,8 @@ class MilestonesController < ApplicationController
   # POST /milestones
   # POST /milestones.json
   def create
-    @milestone = Milestone.new(milestone_params)
-
+    @member = Member.find(params[:member_id])
+    @milestone = @member.milestones.new(milestone_params)
     respond_to do |format|
       if @milestone.save
         format.html { redirect_to @milestone, notice: 'Milestone was successfully created.' }
@@ -56,7 +57,7 @@ class MilestonesController < ApplicationController
   def destroy
     @milestone.destroy
     respond_to do |format|
-      format.html { redirect_to milestones_url, notice: 'Milestone was successfully destroyed.' }
+      format.html { redirect_to @milestone.member, notice: 'Milestone was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

@@ -7,11 +7,13 @@
         <div class="row">
         <% end %>
         <% i=i+1 %>
-        <div class="col-lg-3">
+        <div class="col-lg-3 col-md-4 col-sm-5 col-xs-6">
         <div><%= family.name %></div>
+        <% if family.images.length >0 %>
         <%=link_to( (image_tag root_url + "/images/" + family.images[0].filename, class: "imageBorder",  alt: family.images[0].filename), family) %><br>
-        <span><%= link_to (raw("<i class='fa fa-edit'></i>")), edit_family_path(family) %></span>
-        <span><%= link_to (raw("<i class='fa fa-remove'></i>")), family, method: :delete, data: { confirm: 'Are you sure?' } %></span>
+        <% end %>
+        <span><%= link_to (raw("<i class='fa fa-edit'>Edit</i>")), edit_family_path(family) %></span>
+        <span><%= link_to (raw("<i class='fa fa-remove'>Remove</i>")), family, method: :delete, data: { confirm: 'Are you sure?' } %></span>
         </div>
     <% end %>
 

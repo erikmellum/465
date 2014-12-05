@@ -14,7 +14,8 @@ class HobbiesController < ApplicationController
 
   # GET /hobbies/new
   def new
-    @hobby = Hobby.new
+    @member = Member.find(params[:member_id])
+    @hobby = @member.hobbies.new
   end
 
   # GET /hobbies/1/edit
@@ -24,7 +25,8 @@ class HobbiesController < ApplicationController
   # POST /hobbies
   # POST /hobbies.json
   def create
-    @hobby = Hobby.new(hobby_params)
+    @member = Member.find(params[:member_id]) 
+    @hobby = @member.hobbies.new(hobby_params)
 
     respond_to do |format|
       if @hobby.save
@@ -56,7 +58,7 @@ class HobbiesController < ApplicationController
   def destroy
     @hobby.destroy
     respond_to do |format|
-      format.html { redirect_to hobbies_url, notice: 'Hobby was successfully destroyed.' }
+      format.html { redirect_to @hobby.member, notice: 'Hobby was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

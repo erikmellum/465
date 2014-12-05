@@ -21,9 +21,14 @@ class LikesController < ApplicationController
   end
 
   def create
+    if(current_user.likes.map{|like| like if(like.user == current_user && like.image == Image.find(params[:image_id]))}.compact.length == 0)
     @like = Like.new(like_params)
+    @like.user = current_user
     @like.save
-    respond_with(@like)
+    redirect_to(image_path(params[:image_id]))
+    else
+      destroy
+    end
   end
 
   def update
@@ -32,8 +37,13 @@ class LikesController < ApplicationController
   end
 
   def destroy
-    @like.destroy
-    respond_with(@like)
+    like = current_user.likes.map{|like| like  if(like.user == current_user && like.image == Image.find(params[:image_id])) }.compact[0]
+    if(like)
+      Like.destroy(like)
+      redirect_to(image_path(params[:image_id])) 
+    else
+      create
+    end
   end
 
   private
@@ -42,6 +52,6 @@ class LikesController < ApplicationController
     end
 
     def like_params
-      params.require(:like).permit(:user_id, :comment_id, :image_id)
+      params.permit(:user_id, :comment_id, :image_id)
     end
 end
