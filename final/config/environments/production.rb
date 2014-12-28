@@ -20,7 +20,7 @@ Rails.application.configure do
   # config.action_dispatch.rack_cache = true
 
   # Disable Rails's static asset server (Apache or nginx will already do this).
-  config.serve_static_assets = false
+  config.serve_static_assets = true
 
   # Compress JavaScripts and CSS.
   config.assets.js_compressor = :uglifier
@@ -77,7 +77,7 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   # enable mailer so Devise can send email
-  config.action_mailer.default_url_options = { :host => 'http://ec2-54-69-68-70.us-west-2.compute.amazonaws.com/final' }
+  config.action_mailer.default_url_options = { :host => 'http://ec2-54-69-68-70.us-west-2.compute.amazonaws.com/final/final' }
   # ActionMailer Config
   # Setup for production - deliveries, no errors raised
   config.action_mailer.delivery_method = :smtp

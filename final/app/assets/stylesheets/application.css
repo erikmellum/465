@@ -64,13 +64,15 @@ form input:hover{
   transform: scale(1.02);
 }
 form input:focus{
-  border: 3px solid #00FF00;
+  border: 3px solid #003300;
 }
 #user_nav {
   position: fixed;
+  min-width: 750px;
   width: 100%;
   height: 40px;
   top: 0;
+  margin-top: 8px;
   color: #FCFFF0;
   background: #3A3A38;
   z-index: 1;
@@ -128,7 +130,7 @@ img{
 #welcome{
   position: absolute;
   width: 100%;
-  height 300px;
+  height: 300px;
   background: #E8F1D4;
   z-index: 2;
 }
@@ -263,4 +265,13 @@ input[type="submit"]{
 .nobuttonstyle{
   background: none;
   border: none;
+}
+.search-form{
+  float: right;
+  margin-right: 30px;
+  color: #AAA;;
+}
+.smMargin{
+ margin-top: 10px;
+
 }

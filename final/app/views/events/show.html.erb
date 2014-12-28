@@ -1,4 +1,4 @@
-<p id="notice"><%= notice %></p>
+<div class="row">
 
 <p>
   <strong>Name:</strong>
@@ -25,5 +25,5 @@
   <%= f.submit %>
 </div>
 <% end %>
-<%= link_to 'Edit', edit_event_path(@event) %> 
-<%= link_to 'Back', family_events_path(@event.family) %>
+<%= link_to (raw("<button class='btn btn-default'>Edit</button>")), edit_event_path(@event) %> 
+<%= link_to (raw("<button class='btn btn-default'>Back</button>")), family_events_path(@event.family) %>

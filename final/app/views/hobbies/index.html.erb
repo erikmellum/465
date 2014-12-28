@@ -14,9 +14,9 @@
       <tr>
         <td><%= hobby.name %></td>
         <td><%= hobby.description %></td>
-        <td><%= link_to 'Show', hobby %></td>
-        <td><%= link_to 'Edit', edit_hobby_path(hobby) %></td>
-        <td><%= link_to 'Destroy', hobby, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to (raw("<i class='fa fa-search'>Show</i>")), hobby %></td>
+        <td><%= link_to (raw("<i class='fa fa-edit'>Edit</i>")), edit_hobby_path(hobby) %></td>
+        <td><%= link_to (raw("<i class='fa fa-remove'>Remove</i>")), hobby, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -24,5 +24,5 @@
 
 <br>
 
-<%= link_to 'New Hobby', new_member_hobby_path %>
-<%= link_to 'Back', member_path(params[:member_id])
+<%= link_to (raw("<button class='btn btn-default'>New Hobby</button>")), new_member_hobby_path %>
+<%= link_to (raw("<button class='btn btn-default'>Back</button>")), member_path(params[:member_id]) %>

@@ -10,5 +10,5 @@
   <%= @hobby.description %>
 </p>
 
-<%= link_to 'Edit', edit_hobby_path(@hobby) %> |
-<%= link_to 'Back', member_hobbies_path(@hobby.member) %>
+<%= link_to (raw("<button class='btn btn-default'>Edit</button>")), edit_hobby_path(@hobby) %>
+<%= link_to (raw("<button class='btn btn-default'>Back</button>")), member_hobbies_path(@hobby.member) %>

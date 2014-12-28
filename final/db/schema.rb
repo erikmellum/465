@@ -11,7 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141125225916) do
+ActiveRecord::Schema.define(version: 20141208070155) do
+
+# Could not dump table "comments" because of following NoMethodError
+#   undefined method `[]' for nil:NilClass
 
   create_table "events", force: true do |t|
     t.string   "name"
@@ -19,6 +22,7 @@ ActiveRecord::Schema.define(version: 20141125225916) do
     t.string   "date"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "family_id"
   end
 
   create_table "families", force: true do |t|
@@ -32,6 +36,7 @@ ActiveRecord::Schema.define(version: 20141125225916) do
     t.string   "description"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "member_id"
   end
 
   create_table "images", force: true do |t|
@@ -39,9 +44,24 @@ ActiveRecord::Schema.define(version: 20141125225916) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "family_id"
+    t.string   "filename"
+    t.integer  "member_id"
   end
 
   add_index "images", ["user_id"], name: "index_images_on_user_id"
+
+  create_table "likes", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "comment_id"
+    t.integer  "image_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "likes", ["comment_id"], name: "index_likes_on_comment_id"
+  add_index "likes", ["image_id"], name: "index_likes_on_image_id"
+  add_index "likes", ["user_id"], name: "index_likes_on_user_id"
 
   create_table "members", force: true do |t|
     t.string   "name"
@@ -61,12 +81,15 @@ ActiveRecord::Schema.define(version: 20141125225916) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "member_id"
   end
 
   create_table "relationships", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "member_one"
+    t.integer  "member_two"
   end
 
   create_table "tags", force: true do |t|
@@ -91,6 +114,8 @@ ActiveRecord::Schema.define(version: 20141125225916) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "family_name"
+    t.integer  "family_key"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

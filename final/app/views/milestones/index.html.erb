@@ -16,9 +16,9 @@
         <td><%= milestone.date %></td>
         <td><%= milestone.description %></td>
         <td><%= milestone.name %></td>
-        <td><%= link_to 'Show', milestone %></td>
-        <td><%= link_to 'Edit', edit_milestone_path(milestone) %></td>
-        <td><%= link_to 'Destroy', milestone, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to (raw("<i class='fa fa-search'>Show</i>")), milestone %></td>
+        <td><%= link_to (raw("<i class='fa fa-edit'>Edit</i>")), edit_milestone_path(milestone) %></td>
+        <td><%= link_to (raw("<i class='fa fa-remove'>Remove</i>")), milestone, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -26,5 +26,5 @@
 
 <br>
 
-<%= link_to 'New Milestone', new_member_milestone_path %>
-<%= link_to 'Back', member_path(params[:member_id]) %>
+<%= link_to (raw("<button class='btn btn-default'>New Milestone</button>")), new_member_milestone_path %>
+<%= link_to (raw("<button class='btn btn-default'>Back</button>")), member_path(params[:member_id]) %>

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   devise_for :users
 
   resources :images do
@@ -10,9 +11,13 @@ Rails.application.routes.draw do
       resources :hobbies, shallow: true
       resources :milestones, shallow: true
       resources :relationships, shallow: true
+      resources :images, shallow: true
     end
     resources :events, shallow: true
-    resources :images, shallow: true
+    resources :images, shallow: true do
+      resources :likes, shallow: true
+      resources :comments, shallow: true
+    end
   end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -70,4 +75,5 @@ Rails.application.routes.draw do
   #   end
   root 'families#index'
   get '/', to: 'families#index'
+  get '/search', to: 'search#search'
 end
